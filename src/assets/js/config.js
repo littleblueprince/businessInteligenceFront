@@ -1,66 +1,132 @@
+//示例如下，必须实现以下三个方法:init,show,hide
+var NodeRightMenu = {
+  init: function (_graph) {
+    $("#graph-panel-wrapper").append("<menu>...</menu>");
+    $("#graph-panel-wrapper").on('click', '#contextMenu .menu-btn', function () {
+
+    });
+  },
+  show: function (e, _graph) {
+    this.init(_graph);
+    $("#contextMenu").css({top: e.pageY - 30, left: e.pageX}).show();
+  },
+  hide: function () {
+    $("#contextMenu").hide();
+  }
+};
+
+//连线的右键菜单操作
+var LinkRightMenu = {
+  init: function (_graph, link) {
+    //自定义右键菜单界面元素
+  },
+  show: function (e, _graph, link) {
+  },
+  hide: function () {
+  }
+};
+
 //GraphVis可视化对象通用配置项
 var config = {
   node: { //节点的默认配置
     label: { //标签配置
       show: true, //是否显示
-      color: '137,15,21', //字体颜色
-      font: 'normal 14px Arial', //字体大小及类型
-      textPosition: 'Bottom_Center', //文字位置 Top_Center,Bottom_Center,Middle_Right,Middle_Center
-      borderWidth: 0, //文字边框宽度
-      borderColor: '50,50,50', //标签边框
-      textOffsetY: 4, //文字偏移量
-      //background:'220,220,220'//标签背景色
+      color: '137,15,21',//字体颜色
+      font: 'bold 13px 微软雅黑',//字体大小及类型
+      wrapText: false, //节点包裹文字
+      textPosition: 'Bottom_Center',//文字位置 Top_Center,Bottom_Center,Middle_Right
+      //textOffsetX:-24,//文字横向偏移量
+      //textOffsetY:-24,//文字纵向偏移量
+      //backgroud:'255,255,255',//文字背景色
+      //borderWidth:0,//文字边框宽度
+      //borderColor:'250,250,250'//文字边框颜色
     },
-    shape: 'circle', //rect,circle,star
-    width: 64, //节点宽度
-    height: 64, //节点高度
-    color: '204,223,229', //节点颜色
-    borderColor: '0,40,112', //边框颜色
-    borderWidth: 1, //边框宽度,
-    borderAlpha: 0.6, //边框透明度
-    borderRadius: 5, //边框圆角大小,shape=rect时生效
-    lineDash: [0], //边框虚线间隔,borderWidth>0时生效
-    alpha: 1, //节点透明度
+    shape: 'circle',//节点形状 circle,rect,square,ellipse,triangle,star,polygon,text
+    //image:'images/T1030001.svg',//节点图标(设置后节点显示为圆形图标)
+    color: '204,223,229',//节点颜色
+    borderColor: '0,40,112',//边框颜色
+    borderWidth: 2,//边框宽度,
+    borderRadius: 0,//边框圆角大小
+    lineDash: [0],//边框虚线间隔,borderWidth>0时生效
+    alpha: 1,//节点透明度
+    size: 60, //节点默认大小
+    width: 80, //节点的长度(shape为rect生效)
+    height: 40,//节点的高度(shape为rect生效)
     selected: { //选中时的样式设置
-      borderColor: '0,0,255', //选中时边框颜色
-      borderAlpha: 0.8, //选中时的边框透明度
-      borderWidth: 4, //选中时的边框宽度
-      //showShadow:true,//开启阴影
-      //shadowBlur:20 //阴影大小
-    }
+      borderColor: '0,0,255',//选中时边框颜色
+      borderAlpha: 1,//选中时的边框透明度
+      borderWidth: 8,//选中是的边框宽度
+      showShadow: false,//是否展示阴影
+      shadowColor: '50,100,250'//选中是的阴影颜色
+    },
+    onClick: function (event, node) { //节点点击事件回调
+      console.log('点击节点----[' + node.id + ':' + node.label + ']');
+    },
+    ondblClick: function (event, node) {
+      console.log('双击节点');
+    },//节点双击事件
+    onMouseDown: function (event, node) {
+      console.log('鼠标按下节点');
+    },//节点的鼠标按下事件
+    onMouseUp: function (event, node) {
+      console.log('鼠标弹起节点');
+    },//节点的鼠标弹起事件
+    onMouseOver: function (event, node) {
+      console.log('鼠标移入节点');
+    },//节点的鼠标划过事件
+    onMouseOut: function (event, node) {
+      console.log('鼠标移出节点');
+    },//节点的鼠标划出事件
+    onMousedrag: function (event, node) {
+      console.log('拖动节点');
+    }//节点的拖拽移动事件
   },
   link: { //连线的默认配置
     label: { //连线标签
       show: true, //是否显示
       color: '50,50,50', //字体颜色
-      font: 'normal 13px Arial', //字体大小及类型
-      //background:'220,220,220' //标签背景色
+      font: 'normal 12px 微软雅黑'//字体大小及类型
     },
-    lineType: 'direct', //连线类型,direct,curver,vlink,hlink,vbezier,hbezier,bezier
-    colorType: 'defined', //连线颜色类型 source:继承source颜色,target:继承target颜色 both:用双边颜色，d:自定义
-    color: '230,150,120', //连线颜色
-    alpha: 1, // 连线透明度
+    lineType: 'direct',//连线类型,direct,curver,vlink,hlink,bezier,vbezier,hbezier
+    //colorType:'defined',//连线颜色类型 source:继承source颜色,target:继承target颜色 both:用双边颜色，defined:自定义
+    color: '120,120,120', //连线颜色
+    alpha: 0.8,  // 连线透明度
     lineWidth: 2, //连线宽度
-    lineDash: [0], //虚线间隔样式如：[5,8]
-    showArrow: true , //显示连线箭头
+    lineDash: [0],//虚线间隔样式如：[5,8]
+    showArrow: true,//显示箭头
     selected: { //选中时的样式设置
-      color: '255,50,50' //选中时的颜色
-    }
+      color: '250,50,50',//选中时的颜色
+      alpha: 1,
+      showShadow: false,//是否展示阴影
+      shadowColor: '250,40,30'//选中连线时的阴影颜色
+    },
+    onClick: function (event, link) { //连线点击事件回调
+      console.log('click link---[' + link.source.id + '-->' + link.target.id + ']');
+    },
+    ondblClick: function (event, link) {
+    }//连线的双击回调事件
   },
-  wheelZoom: 0.8, //开启鼠标滚轮缩放
-  highLightNeiber: true //相邻节点高亮开关
-};
-
-
-// var nodeB = visgraph.addNode({id:2,label:"节点B",x:10,y:500});
-// nodeB.shape = 'rect';//设置形状
-// nodeB.setImage('http://media.graphvis.cn/%E9%BB%8E%E6%98%8E_6681.jpg');//设置图片
-//
-// var nodeC = visgraph.addNode({id:3,label:"节点C",x:400,y:500});
-// nodeC.setImage('http://media.graphvis.cn/head41.jpeg');
-
-//示例数据结构
-//var demoData = {"nodes":[{"id":"838644321","label":"192.168.12.164","x":61,"y":1416,"color":"230,28,139"},{"id":"-2051156877","label":"192.168.12.38","x":560,"y":1107,"color":"96,55,164"},{"id":"838644324","label":"192.168.12.167","x":1520,"y":607,"color":"78,173,182"},{"id":"-2051156755","label":"192.168.12.76","x":1081,"y":602,"color":"59,213,175"},{"id":"838644171","label":"192.168.12.119","x":-217,"y":1211,"color":"230,28,139"},{"id":"838645127","label":"192.168.12.214","x":734,"y":1378,"color":"96,55,164"},{"id":"838645126","label":"192.168.12.213","x":-153,"y":1296,"color":"230,28,139"},{"id":"1734948971","label":"192.168.12.9","x":267,"y":1166,"color":"230,28,139"},{"id":"-2051156759","label":"192.168.12.72","x":986,"y":1825,"color":"84,211,41"},{"id":"838644166","label":"192.168.12.114","x":161,"y":1430,"color":"230,28,139"},{"id":"-2051156883","label":"192.168.12.32","x":1156,"y":972,"color":"59,213,175"},{"id":"838645129","label":"192.168.12.216","x":-112,"y":688,"color":"52,134,234"},{"id":"838644165","label":"192.168.12.113","x":395,"y":1078,"color":"230,28,139"},{"id":"-2051156884","label":"192.168.12.31","x":478,"y":973,"color":"230,28,139"},{"id":"838644164","label":"192.168.12.112","x":135,"y":1266,"color":"230,28,139"},{"id":"838645128","label":"192.168.12.215","x":572,"y":1521,"color":"96,55,164"},{"id":"838644163","label":"192.168.12.111","x":295,"y":719,"color":"230,28,139"},{"id":"838644350","label":"192.168.12.172","x":-70,"y":921,"color":"230,28,139"},{"id":"-2007034805","label":"10.54.14.6","x":663,"y":1467,"color":"96,55,164"},{"id":"-809256359","label":"224.0.0.252","x":225,"y":40,"color":"179,11,237"},{"id":"-809256360","label":"224.0.0.251","x":118,"y":1038,"color":"230,28,139"},{"id":"-2051156912","label":"192.168.12.24","x":1189,"y":159,"color":"78,173,182"},{"id":"-2051156911","label":"192.168.12.25","x":-155,"y":802,"color":"230,28,139"},{"id":"838645252","label":"192.168.12.255","x":838,"y":812,"color":"59,213,175"},{"id":"838645248","label":"192.168.12.251","x":1138,"y":725,"color":"59,213,175"},{"id":"-1072993729","label":"239.255.255.250","x":1375,"y":367,"color":"78,173,182"},{"id":"838645159","label":"192.168.12.225","x":339,"y":817,"color":"230,28,139"},{"id":"-2051156789","label":"192.168.12.63","x":1150,"y":1192,"color":"51,125,127"},{"id":"838645160","label":"192.168.12.226","x":166,"y":809,"color":"230,28,139"},{"id":"1013191670","label":"0.0.0.0","x":1434,"y":1456,"color":"51,125,127"},{"id":"838644198","label":"192.168.12.125","x":-261,"y":989,"color":"230,28,139"},{"id":"838644195","label":"192.168.12.122","x":-56,"y":1167,"color":"230,28,139"},{"id":"838644318","label":"192.168.12.161","x":494,"y":53,"color":"179,11,237"},{"id":"-2051156699","label":"192.168.12.90","x":970,"y":532,"color":"59,213,175"},{"id":"838644258","label":"192.168.12.143","x":307,"y":1284,"color":"230,28,139"},{"id":"1807683160","label":"111.206.79.144","x":747,"y":1963,"color":"84,211,41"},{"id":"-2051156939","label":"192.168.12.18","x":879,"y":450,"color":"59,213,175"},{"id":"-2051156696","label":"192.168.12.93","x":13,"y":676,"color":"230,28,139"},{"id":"-2051156693","label":"192.168.12.96","x":110,"y":645,"color":"230,28,139"},{"id":"838644385","label":"192.168.12.186","x":-12,"y":1302,"color":"230,28,139"},{"id":"-2051156822","label":"192.168.12.51","x":764,"y":450,"color":"59,213,175"},{"id":"201294094","label":"192.168.110.193","x":-73,"y":1416,"color":"230,28,139"},{"id":"838644412","label":"192.168.12.192","x":1182,"y":849,"color":"59,213,175"},{"id":"838644410","label":"192.168.12.190","x":-143,"y":1049,"color":"230,28,139"},{"id":"201294933","label":"192.168.110.255","x":-221,"y":1704,"color":"230,28,139"},{"id":"-2050948375","label":"192.168.19.24","x":775,"y":1251,"color":"96,55,164"},{"id":"591595283","label":"228.6.7.8","x":-300,"y":422,"color":"52,134,234"},{"id":"-910498946","label":"255.255.255.255","x":1109,"y":1373,"color":"51,125,127"},{"id":"-2051156846","label":"192.168.12.48","x":-259,"y":1110,"color":"230,28,139"},{"id":"-2051156728","label":"192.168.12.82","x":-227,"y":884,"color":"230,28,139"},{"id":"838644232","label":"192.168.12.138","x":209,"y":661,"color":"230,28,139"},{"id":"838644353","label":"192.168.12.175","x":838,"y":1067,"color":"51,125,127"},{"id":"838645100","label":"192.168.12.208","x":249,"y":1379,"color":"230,28,139"},{"id":"-2051156852","label":"192.168.12.42","x":16,"y":805,"color":"230,28,139"},{"id":"-2051156850","label":"192.168.12.44","x":281,"y":931,"color":"230,28,139"},{"id":"838645224","label":"192.168.12.248","x":1200,"y":1650,"color":"84,211,41"}],"links":[{"source":"1013191670","target":"-910498946"},{"source":"838645129","target":"591595283"},{"source":"-2050948375","target":"-2051156877"},{"source":"-2051156693","target":"-809256360"},{"source":"838644165","target":"-809256360"},{"source":"838644258","target":"-809256360"},{"source":"838644163","target":"-809256360"},{"source":"-2051156728","target":"-809256360"},{"source":"838644195","target":"-809256360"},{"source":"838644232","target":"-809256360"},{"source":"838644321","target":"-809256360"},{"source":"-2051156696","target":"-809256360"},{"source":"-2051156846","target":"-809256360"},{"source":"-2051156852","target":"-809256360"},{"source":"-2051156884","target":"-809256360"},{"source":"838645159","target":"-809256360"},{"source":"838644385","target":"-809256360"},{"source":"-2051156877","target":"-809256360"},{"source":"838645129","target":"-809256360"},{"source":"-2051156850","target":"-809256360"},{"source":"838645100","target":"-809256360"},{"source":"838644410","target":"-809256360"},{"source":"838644198","target":"-809256360"},{"source":"838644166","target":"-809256360"},{"source":"201294094","target":"-809256360"},{"source":"838645160","target":"-809256360"},{"source":"838644171","target":"-809256360"},{"source":"-2051156911","target":"-809256360"},{"source":"1734948971","target":"-809256360"},{"source":"838644164","target":"-809256360"},{"source":"838645126","target":"-809256360"},{"source":"838644350","target":"-809256360"},{"source":"-2051156877","target":"838645127"},{"source":"-2051156877","target":"838645128"},{"source":"-2051156884","target":"838644353"},{"source":"-2051156877","target":"838644353"},{"source":"-2051156759","target":"838645224"},{"source":"-2051156877","target":"838645252"},{"source":"-2051156877","target":"838644165"},{"source":"201294094","target":"201294933"},{"source":"-2051156877","target":"-2007034805"},{"source":"-2051156912","target":"-1072993729"},{"source":"838644324","target":"-1072993729"},{"source":"838644353","target":"-910498946"},{"source":"-2051156759","target":"1807683160"},{"source":"838644318","target":"-809256359"},{"source":"838644353","target":"-2051156789"},{"source":"838644353","target":"838645252"},{"source":"838645248","target":"838645252"},{"source":"-2051156755","target":"838645252"},{"source":"-2051156822","target":"838645252"},{"source":"-2051156939","target":"838645252"},{"source":"-2051156883","target":"838645252"},{"source":"-2051156699","target":"838645252"},{"source":"838644412","target":"838645252","label":"导向1"},{"source":"838645252","target":"838644412","label":"导向2"},{"source":"838645252","target":"-2051156884","label":"导向3"},{"source":"-2051156789","target":"838644412","label":"导向4"},{"source":"-2051156789","target":"-2051156883","label":"导向5"}]};
+  highLightNeiber: false, //相邻节点高度标志
+  wheelZoom: 0.8,//滚轮缩放开关，不使用时不设置[0,1]
+  noElementClick: function (event) {//画布空白处的点击事件
+    console.log('点击了空白区域');
+  },
+  rightMenu: {
+    nodeMenu: NodeRightMenu,  //节点右键菜单配置
+    linkMenu: LinkRightMenu   // 连线右键菜单配置
+  },
+  /* layout:{ //开启内置力导向布局,不配置时不启动
+    type:'force',
+    options:{
+      friction: 0.9,
+      linkDistance: 150,
+      linkStrength: 0.05,
+      charge: -150,
+      gravity: 0.01,
+      noverlap:false
+    }
+  } */
+}
 
 export default {
   config

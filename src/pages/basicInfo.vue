@@ -21,19 +21,19 @@
       shapeType="circle"
     >
     </vue-particles>
-    <b-button class="basicButton" type="primary" @click="btnClick()">
+    <el-button class="basicButton" style="position: absolute;" type="info" @click="btnClick()">
       点击进入
-    </b-button>
+    </el-button>
   </div>
 </template>
 
 <script>
 export default {
   name: "basicInfo",
-  methods:{
+  methods: {
     btnClick() {
       const vm = this;
-      vm.$router.push({name: 'index', params: { id: 10 }})
+      vm.$router.push({name: 'index', params: {id: 10}})
     }
   }
 }
