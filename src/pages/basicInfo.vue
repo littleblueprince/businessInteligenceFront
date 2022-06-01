@@ -33,7 +33,7 @@ export default {
   methods: {
     btnClick() {
       const vm = this;
-      vm.$router.push({name: 'index', params: {id: 10}})
+      vm.$router.push({name: 'index'})
     }
   }
 }

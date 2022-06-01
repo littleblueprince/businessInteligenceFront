@@ -5,7 +5,6 @@
 
 <script>
 import {RUN} from '../assets/js/drawFunction.js'
-
 export default {
   name: "dataShow",
   mounted() {

@@ -12,12 +12,10 @@ import BootstrapVue from "bootstrap-vue";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueParticles from 'vue-particles'
-
+import Axios from 'axios'
+Vue.prototype.$axios = Axios
 Vue.use(BootstrapVue)
-
-
 Vue.use(ElementUI);
-
 Vue.use(VueParticles)
 Vue.config.productionTip = false
 

@@ -25,6 +25,7 @@ function loadData() {
 }
 
 
+
 //按自己需求重新设置可视化元素（点、边）的样式
 function definedGraphStyle() {
 
@@ -685,15 +686,22 @@ function commonOperateEvent() {
 
 }
 
-export function RUN() {
+export function RUN(params) {
   console.log('dataShow start')
   //1、在指定canvas元素上初始化图对象
   visgraph = initVisGraph('graph-panel');
 
-  //2、模拟加载服务端数据，可视化显示
-  var data = loadData();
-  console.log(data)
-  visgraph.drawData(data);
+//2、模拟加载服务端数据，可视化显示
+  if(params===null){
+    var data = loadData(type,params);
+    console.log(data)
+    visgraph.drawData(data);
+  }
+  else {
+    visgraph.drawData(params);
+  }
+
+
 
   //自动缩放居中显示
   visgraph.setZoom('auto');
