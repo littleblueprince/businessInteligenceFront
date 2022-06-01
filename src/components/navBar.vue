@@ -69,106 +69,38 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         inputErrorMessage: '输入格式不正确'
-      }).then(({value}) => {
+      }).then(async ({value}) => {
         console.log('访问后端')
-        // //传递的对象参数设置
-        // let params = {};
-        // params.name="sadasda";
-        // params.age="saadadadasda";
-        // console.log('params',params)
-        // //发送请求到后端
-        // let data=this.$axios.post('http://localhost:8080/api/neo4j/queryByOneNode',
-        //   {
-        //   data:params//传输的数据
-        // }).then(function(response) {
-        //   //获取返回数据
-        //   console.log("data:"+response.data);
-        //
-        // }.bind(this)).catch(function (error) {
-        //   console.log(error);
-        // })
-        this.$router.push(
-          {
-            name: 'test',
-            params: {
-              value:  {
-                "nodes": [
-                  {
-                    "imgURL": "www.Paper.com",
-                    "id": 2212905,
-                    "label": [
-                      "Paper"
-                    ],
-                    "properties": {
-                      "year": 1984,
-                      "index": 19,
-                      "title": "On storage media with after effects"
-                    }
-                  },
-                  {
-                    "imgURL": "www.Author.com",
-                    "id": 101264,
-                    "label": [
-                      "Author"
-                    ],
-                    "properties": {
-                      "hi": 2,
-                      "pc": 21,
-                      "interest": ",worst case estimation,information theory,binary symmetric channel,conditional expectation,distortion function,noisy channel,chromatic number problem,general problem,max problem",
-                      "name": "H. S. Witsenhausen",
-                      "pi": 9.6667,
-                      "index": 111844,
-                      "cn": 17,
-                      "upi": 7.2222
-                    }
+        //传递的对象参数设置
+        let params = {};
+        params.name = value;
+        params.type = "Author";
+        params.limit = 201
+        params.step = 2
+        console.log('params', params)
+        //发送请求到后端
+        let data = await this.$axios.post('http://localhost:8008/api/neo4j/queryByOneNode',
+          params).then(function (response) {
+          //获取返回数据
+          if(response.data.code===200){
+            console.log(response.data.data)
+
+            this.$router.push(
+              {
+                name: 'test',
+                params: {
+                  value: {
+                    "nodes": response.data.data.nodes,
+                    "links": response.data.data.links
                   }
-                ],
-                "links": [
-                  {
-                    "imgURL": "www.constant.com",
-                    "id": 10576083,
-                    "label": [],
-                    "source": 101264,
-                    "type": "WRITE",
-                    "properties": {},
-                    "target": 2212905
-                  },
-                  {
-                    "imgURL": "www.constant.com",
-                    "id": 7635894,
-                    "label": [],
-                    "source": 101264,
-                    "type": "COOPERATION",
-                    "properties": {
-                      "count": 2
-                    },
-                    "target": 1231202
-                  },
-                  {
-                    "imgURL": "www.constant.com",
-                    "id": 7635895,
-                    "label": [],
-                    "source": 1231202,
-                    "type": "COOPERATION",
-                    "properties": {
-                      "count": 2
-                    },
-                    "target": 101264
-                  },
-                  {
-                    "imgURL": "www.constant.com",
-                    "id": 12630928,
-                    "label": [],
-                    "source": 1231202,
-                    "type": "PARTICIPATE_IN",
-                    "properties": {},
-                    "target": 2212905
-                  }
-                ]
+                }
               }
-            }
+            )
           }
-        )
+        }.bind(this)).catch(function (error) {
+          console.log(error);
+        })
+
         console.log('访问后端结束')
         this.$message({
           type: 'success',

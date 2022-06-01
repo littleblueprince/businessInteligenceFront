@@ -2,7 +2,6 @@
   <div>
     <navBar></navBar>
     <side-bar></side-bar>
-    <dataShow></dataShow>
     <rightBar></rightBar>
   </div>
 </template>

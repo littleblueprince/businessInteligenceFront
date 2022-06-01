@@ -31,7 +31,7 @@ var config = {
   node: { //节点的默认配置
     label: { //标签配置
       show: true, //是否显示
-      color: '137,15,21',//字体颜色
+      color: '23,135,231',//字体颜色
       font: 'bold 13px 微软雅黑',//字体大小及类型
       wrapText: false, //节点包裹文字
       textPosition: 'Bottom_Center',//文字位置 Top_Center,Bottom_Center,Middle_Right
@@ -43,7 +43,7 @@ var config = {
     },
     shape: 'circle',//节点形状 circle,rect,square,ellipse,triangle,star,polygon,text
     //image:'images/T1030001.svg',//节点图标(设置后节点显示为圆形图标)
-    color: '204,223,229',//节点颜色
+    color: '255,195,195',//节点颜色
     borderColor: '0,40,112',//边框颜色
     borderWidth: 2,//边框宽度,
     borderRadius: 0,//边框圆角大小
@@ -60,36 +60,36 @@ var config = {
       shadowColor: '50,100,250'//选中是的阴影颜色
     },
     onClick: function (event, node) { //节点点击事件回调
-      console.log('点击节点----[' + node.id + ':' + node.label + ']');
+      // console.log('点击节点----[' + node.id + ':' + node.label + ']');
     },
     ondblClick: function (event, node) {
-      console.log('双击节点');
+      // console.log('双击节点');
     },//节点双击事件
     onMouseDown: function (event, node) {
-      console.log('鼠标按下节点');
+      // console.log('鼠标按下节点');
     },//节点的鼠标按下事件
     onMouseUp: function (event, node) {
-      console.log('鼠标弹起节点');
+      // console.log('鼠标弹起节点');
     },//节点的鼠标弹起事件
     onMouseOver: function (event, node) {
-      console.log('鼠标移入节点');
+      // console.log('鼠标移入节点');
     },//节点的鼠标划过事件
     onMouseOut: function (event, node) {
-      console.log('鼠标移出节点');
+      // console.log('鼠标移出节点');
     },//节点的鼠标划出事件
     onMousedrag: function (event, node) {
-      console.log('拖动节点');
+      // console.log('拖动节点');
     }//节点的拖拽移动事件
   },
   link: { //连线的默认配置
-    label: { //连线标签
+    type: { //连线标签
       show: true, //是否显示
-      color: '50,50,50', //字体颜色
+      color: '150,150,150', //字体颜色
       font: 'normal 12px 微软雅黑'//字体大小及类型
     },
     lineType: 'direct',//连线类型,direct,curver,vlink,hlink,bezier,vbezier,hbezier
     //colorType:'defined',//连线颜色类型 source:继承source颜色,target:继承target颜色 both:用双边颜色，defined:自定义
-    color: '120,120,120', //连线颜色
+    color: '255,17,169', //连线颜色
     alpha: 0.8,  // 连线透明度
     lineWidth: 2, //连线宽度
     lineDash: [0],//虚线间隔样式如：[5,8]
@@ -101,7 +101,7 @@ var config = {
       shadowColor: '250,40,30'//选中连线时的阴影颜色
     },
     onClick: function (event, link) { //连线点击事件回调
-      console.log('click link---[' + link.source.id + '-->' + link.target.id + ']');
+      // console.log('click link---[' + link.source.id + '-->' + link.target.id + ']');
     },
     ondblClick: function (event, link) {
     }//连线的双击回调事件
