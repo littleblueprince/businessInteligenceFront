@@ -146,49 +146,9 @@
             </tr>
           </table>
         </el-collapse-item>
-        <el-collapse-item name="4" title="动态数据演示">
-          <div class="params-warp">
-            <table id="demo-datas" class="small-table">
-              <tr>
-                <td>父节点数</td>
-                <td>
-                  <select id="nodeCount" class="small-selector param">
-                    <option value="5">5</option>
-                    <option value="8">8</option>
-                    <option value="10">10</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>子节点数</td>
-                <td>
-                  <select id="childCount" class="small-selector param">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                  </select>
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div class="longbtn">
-            <button id="interactiveBtn" class="btn btn-sm btn-success" style="width: 100%;;" type="button">
-              <i class="fa fa-play"></i>&nbsp;生成图数据
-            </button>
-          </div>
-          <div class="tiptext">
-            注：随机生成指定的节点和关系，可以双击节点进行数据查询，动态追加数据并布局
-          </div>
-        </el-collapse-item>
         <el-collapse-item name="5" title="常用操作演示">
           <div class="params-warp">
             <table id="demo-datas" class="small-table">
-              <tr>
-                <td>添加连线</td>
-                <td>
-                  <a id="addLink" href="javascript:">开始添加</a>
-                </td>
-              </tr>
-
               <tr>
                 <td>删除选中节点</td>
                 <td>
