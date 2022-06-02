@@ -2,6 +2,7 @@
   <div>
     <navBar></navBar>
     <side-bar></side-bar>
+    <div class="wrapper-panel1"></div>
     <rightBar></rightBar>
   </div>
 </template>
@@ -31,5 +32,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

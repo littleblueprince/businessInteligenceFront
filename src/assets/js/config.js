@@ -1,4 +1,6 @@
 //示例如下，必须实现以下三个方法:init,show,hide
+import mackShow from "./mackShow";
+
 var NodeRightMenu = {
   init: function (_graph) {
     $("#graph-panel-wrapper").append("<menu>...</menu>");
@@ -63,7 +65,14 @@ var config = {
       // console.log('点击节点----[' + node.id + ':' + node.label + ']');
     },
     ondblClick: function (event, node) {
-      // console.log('双击节点');
+      console.log(node.properties)
+      let str=''
+      for (let i in node.properties) {
+        str=str+'<li>'+i+'  :  '+node.properties[i] +'</li> \n'
+      }
+      // console.log(str)
+      console.log('双击节点');
+      mackShow(str)
     },//节点双击事件
     onMouseDown: function (event, node) {
       // console.log('鼠标按下节点');

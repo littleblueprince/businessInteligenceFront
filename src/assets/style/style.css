@@ -11,6 +11,18 @@ html, body {
   background: #ebebeb;
 }
 
+.wrapper-panel1 {
+  position: absolute;
+  top: 56px;
+  left: 35px;
+  width: 100%;
+  height: 100%;
+  background-color: #8EC5FC;
+  background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+
+
+}
+
 .right-side {
   position: absolute;
   width: 300px;
